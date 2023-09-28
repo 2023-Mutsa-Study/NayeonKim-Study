@@ -1,0 +1,8 @@
+1. 클라이언트 요청 -> 서버 -> 응답
+2. stream: ongoing process: 노드가 많은 양의 데이터를 청크로 나눠서 parse
+3. buffer: 여러 개의 청크를 보유하고 파싱이 끝나기 전에 다룰 수 있음
+4. 비동기함수: 함수 안의 함수(콜백함수)를 '나중에' 실행함
+5. 이벤트리스너는 응답이 전송된 후에도 계속 작동 중 -> 이벤트리스너 안에 응답에 영향을 주는 코드 x
+6. incoming requests -> single javascript thread
+    node.js 코드 실행시 event loop 동시에 실행 파일과 관련된 작업 시 완전히 분리됨
+7. app.js: 서버 가동용 코드
