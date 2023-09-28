@@ -1,0 +1,17 @@
+1. package.json > configuration file (구성 파일)
+    1) "start": => 터미널에 npm start 만 작성해도
+    2) "start-server": => 사용자 지정 스크립트 => npm run start-server
+    3) npm install nodemon => 코드 수정할 때마다 일일히 다시 저장하고 재시작하지 않아도 됨
+       개발 과정에서만 (실제 서버에서는 x)
+        (1) --save: 프로덕션 의존성(서버 실행에 도움)으로 설치 => 필요 x(서버 시작되면 코드 동적 변경 x)
+        (2) --save-dev: 단순 개발 도중에만 사용
+        (3) --g: 머신 전체 설치 
+       node_modules 생성 => nodemon은 peer 의존성 존재하기 떄문에 꽤 큰 파일
+       package.json에서 "start": "nodemon app.js" 변경 후 터미널에 npm start 입력
+    4) npm install 로 설치한 패키지들은 package.json 파일에 저장되고 후에 업데이트 되었을 시
+       터미널에 단순히 npm install 만 입력해도(패키지명 명시할 필요 x) 자동으로 업데이트    ~46
+2. errors
+    1) syntax
+    2) runtime
+    3) logical
+       디버깅을 통해 오류 확인 가능, 번외로 변수 값 변경도 가능
