@@ -1,0 +1,2 @@
+MVC(model view controller)
+controller: 모델(코드)과 뷰(UI) 연결

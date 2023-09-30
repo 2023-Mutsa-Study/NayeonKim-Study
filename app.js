@@ -14,8 +14,10 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');    // views 파일 위치
 
-const adminData = require('./sec5/admin');
-const shopRoutes = require('./sec5/shop');
+const adminRoutes = require('./sec5,6/admin');
+const shopRoutes = require('./sec5,6/shop');
+
+const controller404 = require('./controllers/404');
 
 /*  dummy middleware
     app.use((req, res, next) => {
@@ -42,7 +44,7 @@ app.post('/product', (req, res) => {    // app.use()를 app.post()로 바꿔줌�
     res.redirect('/');
 }) */
 
-app.use('/admin', adminData.routes);    //    same as 24~32
+app.use('/admin', adminRoutes);    //    same as 24~32
                                    //    route 경로의 시작점에 /admin으로 시작한다는 필터링 조건 추가
                                    //    admin.js 파일에 존재하는 라우터들의 공통 경로
 
@@ -53,10 +55,7 @@ app.use('/admin', adminData.routes);    //    same as 24~32
 
 app.use(shopRoutes);    // same as 37~40 단, 35와 42의 경우 순서를 신경쓰는 습관을 들이는 것이 중요
 
-app.use((req, res, next) => {
-    // res.status(404).sendFile(path.join(__dirname,'views','404.html'));
-    res.status(404).render('404', {pageTitle: 'Page Not Found'});
-});    // node js는 위에서부터 아래로 코드를 읽으니 404 에러 페이지는 맨 마지막에 위치해야 
+app.use(controller404.page404);    // node js는 위에서부터 아래로 코드를 읽으니 404 에러 페이지는 맨 마지막에 위치해야 
 
 /* const server = http.createServer(app);
 server.listen(3000); */
