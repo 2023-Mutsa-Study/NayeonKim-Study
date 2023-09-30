@@ -4,10 +4,17 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+// const expressHbs = require('express-handlebars');
 
 const app = express();
 
-const adminRoutes = require('./sec5/admin');
+// app.engine('handlebars', expressHbs({layoutDir : 'views/layouts', defaultLayout: 'main-layout', extname: 'handlebars'}));    // 내장되어 있지 않은 새로운 템플릿 엔진 등록
+//app.set('view engine', 'pug');    // set(): express 전역으로 설정 가능한 함수
+                                  // 동적 엔진 pug
+app.set('view engine', 'ejs');
+app.set('views', 'views');    // views 파일 위치
+
+const adminData = require('./sec5/admin');
 const shopRoutes = require('./sec5/shop');
 
 /*  dummy middleware
@@ -35,7 +42,7 @@ app.post('/product', (req, res) => {    // app.use()를 app.post()로 바꿔줌�
     res.redirect('/');
 }) */
 
-app.use('/admin', adminRoutes);    //    same as 24~32
+app.use('/admin', adminData.routes);    //    same as 24~32
                                    //    route 경로의 시작점에 /admin으로 시작한다는 필터링 조건 추가
                                    //    admin.js 파일에 존재하는 라우터들의 공통 경로
 
@@ -47,7 +54,8 @@ app.use('/admin', adminRoutes);    //    same as 24~32
 app.use(shopRoutes);    // same as 37~40 단, 35와 42의 경우 순서를 신경쓰는 습관을 들이는 것이 중요
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+    // res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+    res.status(404).render('404', {pageTitle: 'Page Not Found'});
 });    // node js는 위에서부터 아래로 코드를 읽으니 404 에러 페이지는 맨 마지막에 위치해야 
 
 /* const server = http.createServer(app);

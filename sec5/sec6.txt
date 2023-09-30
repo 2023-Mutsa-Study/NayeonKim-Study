@@ -1,0 +1,14 @@
+1. .pug에서 동적 html 컨텐츠를 만드는 것을 보조
+    -> how?
+        1) pug 문법에 맞도록 기존의 html 파일 형식 변환
+        2) 해당 앱의 기능을 담당하는 js 파일에서 res.render(pug 파일 이름, {전달하고자 하는 키값:value, ...})
+        3) 동적 컨텐츠를 전달하고자 하는 부분에 #{js 파일에서 작성했던 전달하고자 하는 키값}
+2. 반복되는 레이아웃의 경우 main-layout.pug 파일을 통해 관리 가능
+    -> how?
+        1) main-layout.pug 파일에서 block 키워드를 통해 훅을 걸어 놓음
+        2) 개별적인 pug 파일들에서 extends 키워드를 통해 import 가능
+3. handlebars, ejs 위와 비슷
+    -> but! ejs에서 공통 레이아웃을 다루고자 할 때는 약간 다름
+        1) <%= 텍스트 값 전달
+        2) <%- html 전달
+        3) 공통 레이아웃은 include 키워드로 
